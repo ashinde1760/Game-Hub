@@ -1,27 +1,34 @@
-import './App.css'
-import { Grid, GridItem } from "@chakra-ui/react"
-import Navbar from './components/navbar'
+import "./App.css";
+import { Grid, GridItem } from "@chakra-ui/react";
+import Navbar from "./components/navbar";
+import GamesGrid from "./components/GamesGrid";
 
 function App() {
-  return <>
+  return (<>
+      <Grid
+        templateAreas={{
+          base: `'nav' 'main'`,
+          lg: `'nav nav' 'aside main'`,
+        }}
+      >
+        <GridItem area="nav" bg={"coral"} >
+          <Navbar></Navbar>
+        </GridItem>
 
-    <Grid templateAreas={{
-      base: `'nav' 'main'`,
-      lg: `'nav nav' 'aside main'`
-    }}>
+        <GridItem
+          area="aside"
+          bg={"gold"}
+          display={{ base: "none", lg: "block" }}
+        >
+          Aside
+        </GridItem>
 
-      <GridItem area='nav' bg={'coral'}>
-        <Navbar></Navbar>
-      </GridItem>
-
-      <GridItem area='aside' bg={'gold'} display={{ base: 'none', lg: 'block' }}>
-        Aside
-      </GridItem>
-
-      <GridItem area='main' bg={'dodgerblue'}>Main</GridItem>
-    </Grid>
-
-  </>
+        <GridItem area="main">
+          <GamesGrid></GamesGrid>
+        </GridItem>
+      </Grid>
+    </>
+  );
 }
 
-export default App
+export default App;
