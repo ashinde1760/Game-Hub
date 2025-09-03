@@ -5,7 +5,7 @@ import GamesGrid from "./components/GamesGrid";
 import GenresList from "./components/GenresList";
 
 function App() {
-  return (<>
+  return (
       <Grid
         templateAreas={{
           base: `'nav' 'main'`,
@@ -23,9 +23,9 @@ function App() {
 
         <GridItem
           area="aside"
-          bg={"gold"}
           display={{ base: "none", lg: "block" }}
           paddingY={2}
+          borderRight={"1px solid gray"}
         >
           <GenresList/>
         </GridItem>
@@ -34,7 +34,6 @@ function App() {
           <GamesGrid></GamesGrid>
         </GridItem>
       </Grid>
-    </>
   );
 }
 
