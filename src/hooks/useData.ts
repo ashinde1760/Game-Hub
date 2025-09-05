@@ -1,4 +1,5 @@
 import apiClient from "@/services/api-client";
+import type { AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
 
 
@@ -7,7 +8,7 @@ interface FetchResponse<T> {
   results: T[];
 }
 
-const useData = <T>(endpoint: string) => {
+const useData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, deps?: any[]) => {
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState<string>("");
   const [isLoading, setLoading] = useState(false);
@@ -15,7 +16,7 @@ const useData = <T>(endpoint: string) => {
   useEffect(() => {
     setLoading(true);
     apiClient
-      .get<FetchResponse<T>>(endpoint)
+      .get<FetchResponse<T>>(endpoint, { ...requestConfig })
       .then((res) => {
         setData(res.data.results);
         setLoading(false);
@@ -24,7 +25,7 @@ const useData = <T>(endpoint: string) => {
         setError("Failed to fetch games: " + err.message);
         setLoading(false);
       });
-  }, []);
+  }, deps ? [...deps] : []);
   return { data, error, isLoading };
 };
 
